@@ -1,8 +1,3 @@
-/**
- * SPATIAL GLASSMORPHISM JAVASCRIPT - PRODUCTION READY
- * Menambahkan keamanan string, UX timer glowing-pulse, & optimalisasi fetch.
- */
-
 const CONFIG = {
     scriptURL: 'https://script.google.com/macros/s/AKfycbyLcfqhHxWlVnwl_xjW1UbdcBVB2gZy7HrxxOGBWuOTZwRyiPig4m_L1WOLmwPZxOg/exec',
     weddingDate: new Date("April 5, 2026 08:00:00").getTime(),
@@ -15,24 +10,35 @@ const CONFIG = {
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader-screen');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hide');
+            }, 500); 
+        }
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     const guestName = urlParams.get('to');
     const guestNameEl = document.getElementById('guest-name');
     
     if (guestNameEl) {
-        if (guestName && guestName.trim()!== '') {
-            const safeName = guestName.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        if (guestName && guestName.trim() !== '') {
+            const safeName = guestName.replace(/</g, "<").replace(/>/g, ">");
             guestNameEl.innerHTML = safeName;
         } else {
             guestNameEl.innerHTML = "Tamu Kehormatan";
         }
     }
+
     const btnEnter = document.getElementById('btn-enter');
     const gate = document.getElementById('opening-gate');
     const deck = document.getElementById('spatial-deck');
     const island = document.getElementById('dynamic-island');
     const bgMusic = document.getElementById('bg-music');
     const musicFab = document.getElementById('music-fab');
+    const scrollGuide = document.getElementById('scroll-guide');
     let isPlaying = false;
 
     const toggleMusic = () => {
@@ -41,29 +47,42 @@ document.addEventListener("DOMContentLoaded", () => {
             bgMusic.pause();
             if (musicFab) musicFab.classList.remove('playing');
         } else {
-            bgMusic.play().catch(() => console.warn("Sistem meredam putar otomatis (Autoplay policy)."));
+            bgMusic.play().catch(() => {});
             if (musicFab) musicFab.classList.add('playing');
         }
-        isPlaying =!isPlaying;
+        isPlaying = !isPlaying;
     };
 
     if (musicFab) musicFab.addEventListener('click', toggleMusic);
 
+    const openGateEvent = () => {
+        gate.classList.add('slide-up');
+        setTimeout(() => {
+            gate.style.display = 'none';
+            deck.classList.remove('hidden');
+            island.classList.remove('hidden');
+            if (musicFab) musicFab.classList.remove('hidden');
+            initIntersectionObserver();
+        }, 800);
+        if (!isPlaying) toggleMusic();
+    };
+
     if (btnEnter && gate) {
-        btnEnter.addEventListener('click', () => {
-            gate.classList.add('slide-up');
-            
-            setTimeout(() => {
-                gate.style.display = 'none';
-                deck.classList.remove('hidden');
-                island.classList.remove('hidden');
-                if (musicFab) musicFab.classList.remove('hidden');
-                
-                initIntersectionObserver();
-            }, 900);
-            
-            if (!isPlaying) toggleMusic();
-        });
+        btnEnter.addEventListener('click', openGateEvent);
+
+        let startY = 0;
+        gate.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        gate.addEventListener('touchend', e => {
+            let endY = e.changedTouches[0].clientY;
+            if (startY - endY > 60) openGateEvent();
+        }, { passive: true });
+
+        gate.addEventListener('wheel', e => {
+            if (e.deltaY > 60) openGateEvent();
+        }, { passive: true });
     }
 
     const initIntersectionObserver = () => {
@@ -79,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         elements.forEach(el => observer.observe(el));
 
-        // Highlighting Active Menu On Scroll
         const cards = document.querySelectorAll('.stack-card');
         const navItems = document.querySelectorAll('.nav-item');
         
@@ -95,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             });
-        }, { threshold: 0.55 });
+        }, { threshold: 0.35 });
         
         cards.forEach(card => navObserver.observe(card));
     };
@@ -111,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const animateDigit = (el) => {
             el.classList.remove('tick-anim');
-            void el.offsetWidth; 
+            void el.offsetWidth;
             el.classList.add('tick-anim');
         };
 
@@ -127,10 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-            if (d!== pD) { elDays.innerText = String(d).padStart(2, '0'); animateDigit(elDays); pD = d; }
-            if (h!== pH) { elHours.innerText = String(h).padStart(2, '0'); animateDigit(elHours); pH = h; }
-            if (m!== pM) { elMinutes.innerText = String(m).padStart(2, '0'); animateDigit(elMinutes); pM = m; }
-            if (s!== pS) { elSeconds.innerText = String(s).padStart(2, '0'); animateDigit(elSeconds); pS = s; }
+            if (d !== pD) { elDays.innerText = String(d).padStart(2, '0'); animateDigit(elDays); pD = d; }
+            if (h !== pH) { elHours.innerText = String(h).padStart(2, '0'); animateDigit(elHours); pH = h; }
+            if (m !== pM) { elMinutes.innerText = String(m).padStart(2, '0'); animateDigit(elMinutes); pM = m; }
+            if (s !== pS) { elSeconds.innerText = String(s).padStart(2, '0'); animateDigit(elSeconds); pS = s; }
 
             requestAnimationFrame(updateTime);
         };
@@ -140,23 +158,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let lastScrollY = window.scrollY;
     let ticking = false;
+    let hasScrolled = false;
+
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const currentY = window.scrollY;
+                
+                if (!hasScrolled && currentY > 50 && scrollGuide) {
+                    scrollGuide.classList.add('fade-out');
+                    hasScrolled = true;
+                }
+
                 if (currentY > lastScrollY && currentY > 200) {
                     island.classList.add('nav-hidden');
                 } else {
                     island.classList.remove('nav-hidden');
                 }
+                
                 lastScrollY = currentY;
                 ticking = false;
             });
             ticking = true;
         }
-    });
+    }, { passive: true });
 
-    if (typeof Swiper!== 'undefined') {
+    if (typeof Swiper !== 'undefined') {
         new Swiper('.bento-swiper', {
             slidesPerView: "auto",
             spaceBetween: 20,
@@ -181,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnStory && fullStory) {
         btnStory.addEventListener('click', () => {
             fullStory.classList.toggle('hidden');
-            btnStory.innerHTML = fullStory.classList.contains('hidden')? '<i class="fas fa-book-open"></i> Baca' : '<i class="fas fa-times"></i> Tutup';
+            btnStory.innerHTML = fullStory.classList.contains('hidden') ? '<i class="fas fa-book-open"></i> Baca' : '<i class="fas fa-times"></i> Tutup';
         });
     }
 
@@ -190,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnGift && drawerGift) {
         btnGift.addEventListener('click', () => {
             drawerGift.classList.toggle('hidden');
-            btnGift.innerHTML = drawerGift.classList.contains('hidden')? '<i class="fas fa-chevron-down"></i> Buka' : '<i class="fas fa-chevron-up"></i> Tutup';
+            btnGift.innerHTML = drawerGift.classList.contains('hidden') ? '<i class="fas fa-chevron-down"></i> Buka' : '<i class="fas fa-chevron-up"></i> Tutup';
         });
     }
 
@@ -204,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const nama = document.getElementById('rsvp-name').value.trim();
             const pesan = document.getElementById('rsvp-message').value.trim();
-            if (!nama ||!pesan) return;
+            if (!nama || !pesan) return;
 
             const originalText = btnSubmit.innerHTML;
             btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengirim...';
@@ -214,19 +241,19 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(CONFIG.scriptURL, { method: 'POST', body: formData })
             .then(res => res.json())
             .then(() => {
-                    fetchWishes();
-                    rsvpForm.reset();
-                    showToast("RSVP Berhasil Terkirim!");
-                })
+                fetchWishes();
+                rsvpForm.reset();
+                showToast("RSVP Berhasil Terkirim!");
+            })
             .catch(() => {
-                    fetchWishes();
-                    rsvpForm.reset();
-                    showToast("RSVP Tersimpan!");
-                })
+                fetchWishes();
+                rsvpForm.reset();
+                showToast("RSVP Tersimpan!");
+            })
             .finally(() => {
-                    btnSubmit.innerHTML = originalText;
-                    btnSubmit.disabled = false;
-                });
+                btnSubmit.innerHTML = originalText;
+                btnSubmit.disabled = false;
+            });
         });
     }
 });
@@ -264,25 +291,25 @@ window.fetchWishes = function() {
     fetch(CONFIG.scriptURL)
     .then(res => res.json())
     .then(data => {
-            if(data.result === "success" && data.data) {
-                let html = '';
-                data.data.reverse().forEach(item => {
-                    let nameColor = item.kehadiran === 'Hadir'? 'var(--orb-4)' : 'var(--orb-2)';
-                    html += `
-                        <div class="chat-msg">
-                            <div class="flex-between">
-                                <h4 style="color: ${nameColor}; font-size: 1rem;">${item.nama}</h4>
-                                <span class="text-xs text-muted"><i class="far fa-clock"></i> ${item.waktu || ''}</span>
-                            </div>
-                            <p class="text-sm mt-1">${item.pesan}</p>
+        if(data.result === "success" && data.data) {
+            let html = '';
+            data.data.reverse().forEach(item => {
+                let nameColor = item.kehadiran === 'Hadir' ? 'var(--orb-4)' : 'var(--orb-2)';
+                html += `
+                    <div class="chat-msg">
+                        <div class="flex-between">
+                            <h4 style="color: ${nameColor}; font-size: 1rem;">${item.nama}</h4>
+                            <span class="text-xs text-muted"><i class="far fa-clock"></i> ${item.waktu || ''}</span>
                         </div>
-                    `;
-                });
-                container.innerHTML = html || '<p class="text-sm text-muted text-center italic mt-2">Jadilah yang pertama memberi ucapan!</p>';
-            }
-        }).catch(() => {
-            if(container.innerHTML.includes('Memuat ucapan')) {
-                container.innerHTML = '<p class="text-sm text-muted text-center italic mt-2">Gagal memuat buku tamu (Sedang luring/offline).</p>';
-            }
-        });
+                        <p class="text-sm mt-1">${item.pesan}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html || '<p class="text-sm text-muted text-center italic mt-2">Jadilah yang pertama memberi ucapan!</p>';
+        }
+    }).catch(() => {
+        if(container.innerHTML.includes('Memuat ucapan')) {
+            container.innerHTML = '<p class="text-sm text-muted text-center italic mt-2">Gagal memuat buku tamu (Sedang luring/offline).</p>';
+        }
+    });
 };

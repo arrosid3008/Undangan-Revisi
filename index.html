@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="loader-screen" class="glass-loader-wrapper">
+        <div class="spinner"></div>
+        <p class="mt-3 text-sm text-muted tracking-widest uppercase">Memuat...</p>
+    </div>
+
     <div class="ambient-canvas">
-        <div class="bg-image-layer"></div>
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
@@ -26,18 +30,23 @@
     </div>
 
     <div id="opening-gate" class="glass-gate">
+        <div class="gate-bg"></div>
         <div class="gate-content reveal-init">
             <p class="eyebrow-text tracking-widest">THE WEDDING OF</p>
-            <h1 class="hero-title gradient-text-gold">Zumrotus<br>& Arrosid</h1>
+            <h1 class="hero-title gradient-text-gold title-center glow-float">Zumrotus<br>& Arrosid</h1>
             
-            <div class="guest-capsule glass-bento mt-4">
+            <div class="guest-capsule glass-bento mt-4 float-delay">
                 <span class="text-xs text-muted uppercase">Kepada Yth. Bapak/Ibu/Saudara/i</span>
-                <h2 id="guest-name" class="guest-name mt-1">Tamu Kehormatan</h2>
+                <h2 id="guest-name" class="guest-name mt-1 title-center">Tamu Kehormatan</h2>
             </div>
             
             <button id="btn-enter" class="btn-neon mt-4">
                 <i class="fas fa-envelope-open-text"></i> Buka Undangan
             </button>
+        </div>
+        <div class="swipe-hint">
+            <i class="fas fa-chevron-up"></i>
+            <span>Swipe / Scroll ke Atas</span>
         </div>
     </div>
 
@@ -51,12 +60,12 @@
     <main id="spatial-deck" class="hidden">
         
         <section id="s-hero" class="stack-card">
-            <div class="card-glass-body flex-center">
-                <div class="hero-image-bento reveal fade-up">
-                    <img src="assets/img/hero.jpeg" alt="Zumrotus and Arrosid">
+            <div class="card-glass-body flex-center relative-h">
+                <div class="hero-image-bento reveal fade-up glow-float">
+                    <img src="assets/img/hero.jpeg" alt="Zumrotus and Arrosid" fetchpriority="high">
                     <div class="glass-tag">05. 04. 2026</div>
                 </div>
-                <h1 class="hero-title gradient-text-light mt-3 reveal fade-up delay-1">Zumrotus <span class="text-italic">&</span> Arrosid</h1>
+                <h1 class="hero-title gradient-text-light mt-3 reveal fade-up delay-1 title-center">Zumrotus <span class="text-italic">&</span> Arrosid</h1>
                 
                 <div class="bento-countdown mt-4 reveal fade-up delay-2">
                     <div class="time-block">
@@ -80,6 +89,11 @@
                     <a href="#" id="btn-google-cal" target="_blank" class="btn-glass-sm"><i class="fab fa-google"></i> Google Cal</a>
                     <a href="#" id="btn-apple-cal" class="btn-glass-sm"><i class="fab fa-apple"></i> Apple Cal</a>
                 </div>
+
+                <div id="scroll-guide" class="scroll-guidance reveal fade-up delay-3">
+                    <span class="text-xs text-muted">Scroll ke bawah</span>
+                    <i class="fas fa-chevron-down bounce-anim"></i>
+                </div>
             </div>
         </section>
 
@@ -90,21 +104,21 @@
                 
                 <div class="bento-grid">
                     <div class="glass-bento bento-couple reveal scale-in">
-                        <img src="assets/img/ppzum.jpeg" alt="Bride" class="bento-avatar">
+                        <img src="assets/img/ppzum.jpeg" alt="Bride" class="bento-avatar glow-float" loading="lazy">
                         <h3 class="gradient-text-gold">Zumrotus Sa'adah</h3>
                         <p class="text-xs text-muted mt-1">Putri dari Bapak Rhanang Muhyar & Ibu Sulistyorini</p>
                         <a href="#" class="social-pill"><i class="fab fa-instagram"></i> @cnafhxnt</a>
                     </div>
 
                     <div class="glass-bento bento-couple reveal scale-in delay-1">
-                        <img src="assets/img/pprosid.jpeg" alt="Groom" class="bento-avatar">
+                        <img src="assets/img/pprosid.jpeg" alt="Groom" class="bento-avatar glow-float" loading="lazy">
                         <h3 class="gradient-text-gold">Muhamad Arrosid</h3>
                         <p class="text-xs text-muted mt-1">Putra dari Bapak Mugiono & Ibu Nurhayati</p>
                         <a href="#" class="social-pill"><i class="fab fa-instagram"></i> @mhmarsd</a>
                     </div>
 
                     <div class="glass-bento col-span-full text-center mt-2 reveal fade-up delay-2">
-                        <img src="assets/img/quran.gif" alt="Bismillah" class="bismillah-icon">
+                        <img src="assets/img/quran.gif" alt="Bismillah" class="bismillah-icon float-delay" loading="lazy">
                         <p class="arabic-text mt-3" dir="rtl">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>
                         <p class="text-xs text-muted italic mt-2">"Wa min āyātihī an khalaqa lakum min anfusikum azwājal litaskunū ilaihā wa ja'ala bainakum mawaddataw wa raḥmah, inna fī żālika la'āyātil liqaumiy yatafakkarūn."</p>
                         <p class="text-sm mt-3">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
@@ -150,7 +164,7 @@
                     <h2 class="section-title gradient-text-light">Galeri & Kisah</h2>
                 </div>
 
-                <div class="swiper bento-swiper reveal blur-in pl-4">
+                <div class="swiper bento-swiper reveal fade-up pl-4">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery1.jpeg" alt="Gallery 1" loading="lazy"></div>
                         <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery2.jpeg" alt="Gallery 2" loading="lazy"></div>
@@ -285,7 +299,7 @@
                     <p class="text-body mb-2">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
                     <p class="text-body mb-4">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
                     <p class="arabic-text gradient-text-gold text-xl">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</p>
-                    <h2 class="hero-title text-2xl gradient-text-gold mt-4">Zumrotus & Arrosid</h2>
+                    <h2 class="hero-title text-2xl gradient-text-gold mt-4 title-center">Zumrotus & Arrosid</h2>
                     <div class="divider mt-4"></div>
                     <p class="text-xs text-muted">© 2026 All Rights Reserved.</p>
                 </div>
