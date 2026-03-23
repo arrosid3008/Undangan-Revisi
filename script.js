@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (guestNameEl) {
         if (guestName && guestName.trim() !== '') {
-            const safeName = guestName.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const safeName = guestName.replace(/</g, "<").replace(/>/g, ">");
             guestNameEl.innerHTML = safeName;
         } else {
             guestNameEl.innerHTML = "Tamu Kehormatan";
@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const island = document.getElementById('dynamic-island');
     const bgMusic = document.getElementById('bg-music');
     const musicFab = document.getElementById('music-fab');
-    const scrollGuide = document.getElementById('scroll-guide');
     let isPlaying = false;
 
     const toggleMusic = () => {
@@ -86,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const initIntersectionObserver = () => {
+        // Observer for reveal animations
         const elements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
@@ -94,11 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     obs.unobserve(entry.target); 
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         elements.forEach(el => observer.observe(el));
 
-        const cards = document.querySelectorAll('.stack-card');
+        // Observer for active dynamic island navigation
+        const sections = document.querySelectorAll('.floating-section');
         const navItems = document.querySelectorAll('.nav-item');
         
         const navObserver = new IntersectionObserver((entries) => {
@@ -113,9 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             });
-        }, { threshold: 0.5 });
+        }, { rootMargin: "-30% 0px -60% 0px" }); // Aktif ketika section masuk ke zona tengah-atas layar
         
-        cards.forEach(card => navObserver.observe(card));
+        sections.forEach(section => navObserver.observe(section));
     };
 
     const initCountdown = () => {
@@ -158,18 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let lastScrollY = window.scrollY;
     let ticking = false;
-    let hasScrolled = false;
 
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const currentY = window.scrollY;
                 
-                if (!hasScrolled && currentY > 50 && scrollGuide) {
-                    scrollGuide.classList.add('fade-out');
-                    hasScrolled = true;
-                }
-
+                // Menyembunyikan Dynamic Island saat scroll cepat ke bawah, tampil saat scroll ke atas
                 if (currentY > lastScrollY && currentY > 200) {
                     island.classList.add('nav-hidden');
                 } else {
