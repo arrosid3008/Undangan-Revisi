@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (guestNameEl) {
         if (guestName && guestName.trim() !== '') {
-            const safeName = guestName.replace(/</g, "<").replace(/>/g, ">");
+            const safeName = guestName.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             guestNameEl.innerHTML = safeName;
         } else {
             guestNameEl.innerHTML = "Tamu Kehormatan";
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             });
-        }, { threshold: 0.35 });
+        }, { threshold: 0.5 });
         
         cards.forEach(card => navObserver.observe(card));
     };
