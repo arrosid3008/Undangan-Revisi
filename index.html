@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Wedding Of Zumrotus & Arrosid</title>
+    
+    <link rel="preload" as="image" href="assets/img/ftbg.jpeg">
+    <link rel="preload" as="image" href="assets/img/hero.jpeg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ambient-canvas">
+        <div class="bg-image-layer"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <div id="opening-gate" class="glass-gate">
+        <div class="gate-content reveal-init">
+            <p class="eyebrow-text tracking-widest">THE WEDDING OF</p>
+            <h1 class="hero-title gradient-text-gold">Zumrotus<br>& Arrosid</h1>
+            
+            <div class="guest-capsule glass-bento mt-4">
+                <span class="text-xs text-muted uppercase">Kepada Yth. Bapak/Ibu/Saudara/i</span>
+                <h2 id="guest-name" class="guest-name mt-1">Tamu Kehormatan</h2>
+            </div>
+            
+            <button id="btn-enter" class="btn-neon mt-4">
+                <i class="fas fa-envelope-open-text"></i> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/audio/Batas Senja - Nanti Kita Seperti Ini (Official Music Video).mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-fab" class="floating-action-btn hidden" aria-label="Toggle Music">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <main id="spatial-deck" class="hidden">
+        
+        <section id="s-hero" class="stack-card">
+            <div class="card-glass-body flex-center">
+                <div class="hero-image-bento reveal fade-up">
+                    <img src="assets/img/hero.jpeg" alt="Zumrotus and Arrosid">
+                    <div class="glass-tag">05. 04. 2026</div>
+                </div>
+                <h1 class="hero-title gradient-text-light mt-3 reveal fade-up delay-1">Zumrotus <span class="text-italic">&</span> Arrosid</h1>
+                
+                <div class="bento-countdown mt-4 reveal fade-up delay-2">
+                    <div class="time-block">
+                        <span id="days">00</span><p>Hari</p>
+                    </div>
+                    <div class="time-divider">:</div>
+                    <div class="time-block">
+                        <span id="hours">00</span><p>Jam</p>
+                    </div>
+                    <div class="time-divider">:</div>
+                    <div class="time-block">
+                        <span id="minutes">00</span><p>Menit</p>
+                    </div>
+                    <div class="time-divider">:</div>
+                    <div class="time-block">
+                        <span id="seconds">00</span><p>Detik</p>
+                    </div>
+                </div>
+
+                <div class="cal-actions mt-4 reveal fade-up delay-3">
+                    <a href="#" id="btn-google-cal" target="_blank" class="btn-glass-sm"><i class="fab fa-google"></i> Google Cal</a>
+                    <a href="#" id="btn-apple-cal" class="btn-glass-sm"><i class="fab fa-apple"></i> Apple Cal</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="s-details" class="stack-card">
+            <div class="card-glass-body">
+                <h2 class="section-title gradient-text-light mb-3 text-center">Sang Mempelai</h2>
+                <p class="text-body text-center mb-4 reveal fade-up">Assalamu'alaikum Warahmatullahi Wabarakatuh.<br>Tanpa mengurangi rasa hormat, kami mengundang Saudara/i untuk berkenan menghadiri acara pernikahan kami:</p>
+                
+                <div class="bento-grid">
+                    <div class="glass-bento bento-couple reveal scale-in">
+                        <img src="assets/img/ppzum.jpeg" alt="Bride" class="bento-avatar">
+                        <h3 class="gradient-text-gold">Zumrotus Sa'adah</h3>
+                        <p class="text-xs text-muted mt-1">Putri dari Bapak Rhanang Muhyar & Ibu Sulistyorini</p>
+                        <a href="#" class="social-pill"><i class="fab fa-instagram"></i> @cnafhxnt</a>
+                    </div>
+
+                    <div class="glass-bento bento-couple reveal scale-in delay-1">
+                        <img src="assets/img/pprosid.jpeg" alt="Groom" class="bento-avatar">
+                        <h3 class="gradient-text-gold">Muhamad Arrosid</h3>
+                        <p class="text-xs text-muted mt-1">Putra dari Bapak Mugiono & Ibu Nurhayati</p>
+                        <a href="#" class="social-pill"><i class="fab fa-instagram"></i> @mhmarsd</a>
+                    </div>
+
+                    <div class="glass-bento col-span-full text-center mt-2 reveal fade-up delay-2">
+                        <img src="assets/img/quran.gif" alt="Bismillah" class="bismillah-icon">
+                        <p class="arabic-text mt-3" dir="rtl">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>
+                        <p class="text-xs text-muted italic mt-2">"Wa min āyātihī an khalaqa lakum min anfusikum azwājal litaskunū ilaihā wa ja'ala bainakum mawaddataw wa raḥmah, inna fī żālika la'āyātil liqaumiy yatafakkarūn."</p>
+                        <p class="text-sm mt-3">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
+                        <h4 class="text-sm font-bold text-pink mt-2">(QS. Ar-Rum: 21)</h4>
+                    </div>
+
+                    <div class="glass-bento bento-event reveal slide-left mt-2 col-span-full">
+                        <div class="event-header">
+                            <div class="icon-glow"><i class="fas fa-ring"></i></div>
+                            <div>
+                                <h3 class="gradient-text-gold text-lg">Akad Nikah</h3>
+                                <p class="text-sm text-muted">Minggu, 05 April 2026</p>
+                            </div>
+                        </div>
+                        <div class="event-body mt-3">
+                            <p class="text-sm mb-1"><i class="far fa-clock text-pink mr-2"></i> 08:00 WIB - Selesai</p>
+                            <p class="text-sm"><i class="fas fa-map-marker-alt text-pink mr-2"></i> <b>Gor Jatimekar</b></p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/f5np5Qe9EfCKzc8R7" target="_blank" class="btn-glass-sm w-100 justify-center mt-3"><i class="fas fa-location-arrow"></i> Buka Google Maps</a>
+                    </div>
+
+                    <div class="glass-bento bento-event reveal slide-right mt-2 col-span-full">
+                        <div class="event-header">
+                            <div class="icon-glow"><i class="fas fa-glass-cheers"></i></div>
+                            <div>
+                                <h3 class="gradient-text-gold text-lg">Resepsi</h3>
+                                <p class="text-sm text-muted">Minggu, 05 April 2026</p>
+                            </div>
+                        </div>
+                        <div class="event-body mt-3">
+                            <p class="text-sm mb-1"><i class="far fa-clock text-pink mr-2"></i> 11:00 WIB - Selesai</p>
+                            <p class="text-sm"><i class="fas fa-map-marker-alt text-pink mr-2"></i> <b>Gor Jatimekar</b></p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/f5np5Qe9EfCKzc8R7" target="_blank" class="btn-glass-sm w-100 justify-center mt-3"><i class="fas fa-location-arrow"></i> Buka Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="s-gallery" class="stack-card">
+            <div class="card-glass-body no-pad-x">
+                <div class="pad-x mb-3 text-center">
+                    <h2 class="section-title gradient-text-light">Galeri & Kisah</h2>
+                </div>
+
+                <div class="swiper bento-swiper reveal blur-in pl-4">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery1.jpeg" alt="Gallery 1" loading="lazy"></div>
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery2.jpeg" alt="Gallery 2" loading="lazy"></div>
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery3.jpeg" alt="Gallery 3" loading="lazy"></div>
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery4.jpeg" alt="Gallery 4" loading="lazy"></div>
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery5.jpeg" alt="Gallery 5" loading="lazy"></div>
+                        <div class="swiper-slide glass-bento-img"><img src="assets/img/gallery6.jpeg" alt="Gallery 6" loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="pad-x mt-4">
+                    <div class="glass-bento reveal fade-up">
+                        <div class="story-cover mb-3">
+                            <img src="assets/img/story.jpeg" alt="Our Story" loading="lazy">
+                        </div>
+                        <div class="flex-between mb-2">
+                            <h3 class="gradient-text-gold text-lg">Our Story</h3>
+                            <button id="toggle-story" class="btn-glass-sm"><i class="fas fa-book-open"></i> Baca</button>
+                        </div>
+                        <p class="text-sm text-muted italic">Setiap cerita memiliki permulaannya sendiri...</p>
+                        
+                        <div id="story-full" class="hidden mt-4">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="gradient-text-gold">Desember 2023</h4>
+                                    <p class="text-sm mt-1">Berawal dari sebuah acara kampus, di tengah hiruk pikuk kegiatan mahasiswa, takdir memperkenalkan kita untuk pertama kalinya.</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="gradient-text-gold">Februari 2024</h4>
+                                    <p class="text-sm mt-1">Dari sekadar tegur sapa menjadi sebuah rasa. Kita memutuskan untuk berjalan beriringan dan saling berbagi cerita dalam sebuah komitmen.</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="gradient-text-gold">Desember 2025</h4>
+                                    <p class="text-sm mt-1">Menutup tahun dengan sebuah janji suci. Di hadapan keluarga, kita memantapkan hati untuk melangkah ke jenjang yang lebih serius selamanya.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="video-wrapper mt-3">
+                                <video id="story-video" controls preload="none">
+                                    <source src="assets/vid/Story-ofus.MP4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="s-action" class="stack-card">
+            <div class="card-glass-body pb-safe">
+                <h2 class="section-title gradient-text-light mb-4 text-center">RSVP & Tanda Kasih</h2>
+                
+                <div class="bento-grid">
+                    <div class="glass-bento col-span-full reveal slide-left">
+                        <div class="flex-between">
+                            <div>
+                                <h3 class="gradient-text-gold text-lg"><i class="fas fa-gift mr-2"></i> Kirim Hadiah</h3>
+                                <p class="text-xs text-muted mt-1">Bagi yang ingin memberikan tanda kasih.</p>
+                            </div>
+                            <button id="toggle-gift" class="btn-glass-sm"><i class="fas fa-chevron-down"></i> Buka</button>
+                        </div>
+
+                        <div id="gift-drawer" class="gift-drawer mt-4 hidden">
+                            <div class="glass-bento-inner mb-3">
+                                <div class="flex-between align-end">
+                                    <div>
+                                        <p class="text-xs text-blue uppercase font-bold"><i class="fas fa-university mr-1"></i> BCA</p>
+                                        <p class="text-xs mt-1">Muhamad Arrosid</p>
+                                        <h4 id="rek-bca" class="tracking-widest mt-1 text-lg">3930698821</h4>
+                                    </div>
+                                    <button type="button" class="btn-icon" onclick="copyText('rek-bca', this)" aria-label="Salin"><i class="far fa-copy"></i></button>
+                                </div>
+                            </div>
+                            <div class="glass-bento-inner mb-3">
+                                <div class="flex-between align-end">
+                                    <div>
+                                        <p class="text-xs text-pink uppercase font-bold"><i class="fas fa-wallet mr-1"></i> DANA</p>
+                                        <p class="text-xs mt-1">Zumrotus Sa'adah</p>
+                                        <h4 id="rek-dana" class="tracking-widest mt-1 text-lg">089519773602</h4>
+                                    </div>
+                                    <button type="button" class="btn-icon" onclick="copyText('rek-dana', this)" aria-label="Salin"><i class="far fa-copy"></i></button>
+                                </div>
+                            </div>
+                            <div class="glass-bento-inner">
+                                <div class="flex-between align-start">
+                                    <div class="pr-2">
+                                        <p class="text-xs text-gold uppercase font-bold mb-1"><i class="fas fa-box-open mr-1"></i> Kado Fisik</p>
+                                        <p class="text-xs">Penerima: <b>Zumrotus Sa'adah</b></p>
+                                        <p class="text-xs">No. HP: 089519773602</p>
+                                        <p id="alamat-kado" class="text-xs text-muted mt-2">Perum Bojong Malaka Indah Blok H3 no 136 Bojongmalaka, Baleendah, Bandung</p>
+                                    </div>
+                                    <button type="button" class="btn-icon" onclick="copyText('alamat-kado', this)" aria-label="Salin"><i class="far fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-bento col-span-full reveal slide-right delay-1 mt-2">
+                        <h3 class="gradient-text-gold text-lg mb-3"><i class="fas fa-envelope-open mr-2"></i> Konfirmasi Kehadiran</h3>
+                        <form id="rsvp-form" name="submit-to-google-sheet">
+                            <input type="text" id="rsvp-name" name="nama" class="glass-input" placeholder="Nama Anda" required autocomplete="off">
+                            <div class="grid-2 mt-3">
+                                <select id="rsvp-attendance" name="kehadiran" class="glass-input" required>
+                                    <option value="" disabled selected>Kehadiran?</option>
+                                    <option value="Hadir">Hadir</option>
+                                    <option value="Tidak Hadir">Tidak Hadir</option>
+                                </select>
+                                <select id="rsvp-jumlah" name="jumlah" class="glass-input" required>
+                                    <option value="" disabled selected>Jumlah Tamu?</option>
+                                    <option value="1 Orang">1 Org</option>
+                                    <option value="2 Orang">2 Org</option>
+                                    <option value="Lebih dari 2">Lebih dari 2</option>
+                                </select>
+                            </div>
+                            <textarea id="rsvp-message" name="pesan" class="glass-input mt-3" rows="3" placeholder="Tuliskan doa & ucapan..." required></textarea>
+                            <button type="submit" id="btn-submit-rsvp" class="btn-neon w-100 mt-3 justify-center"><i class="fas fa-paper-plane mr-2"></i> Kirim Ucapan</button>
+                        </form>
+                    </div>
+
+                    <div class="glass-bento col-span-full reveal fade-up delay-2 mt-2">
+                        <h3 class="text-lg mb-3"><i class="fas fa-comments mr-2"></i> Buku Tamu</h3>
+                        <div id="wishes-list" class="wishes-stream">
+                            <div class="text-center mt-3"><i class="fas fa-spinner fa-spin text-gold"></i> Memuat ucapan...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-5 text-center reveal fade-up">
+                    <p class="text-body mb-2">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+                    <p class="text-body mb-4">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
+                    <p class="arabic-text gradient-text-gold text-xl">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</p>
+                    <h2 class="hero-title text-2xl gradient-text-gold mt-4">Zumrotus & Arrosid</h2>
+                    <div class="divider mt-4"></div>
+                    <p class="text-xs text-muted">© 2026 All Rights Reserved.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <nav id="dynamic-island" class="dynamic-island hidden">
+        <a href="#s-hero" class="nav-item active"><i class="fas fa-home"></i></a>
+        <a href="#s-details" class="nav-item"><i class="fas fa-heart"></i></a>
+        <a href="#s-gallery" class="nav-item"><i class="fas fa-images"></i></a>
+        <a href="#s-action" class="nav-item"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <div id="glass-toast" class="glass-toast">
+        <i class="fas fa-check-circle"></i> <span id="toast-text">Tersalin!</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
